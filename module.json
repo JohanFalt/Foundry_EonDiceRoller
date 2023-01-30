@@ -1,0 +1,24 @@
+{
+  "id": "eon-dice-roller",
+  "title": "Eon",
+  "description": "",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Johan Fält",
+      "discord": "johanfk#0054",
+      "flags": {}
+    }
+  ],
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10",
+    "maximum": "10"
+  },
+  "scripts": ["scripts/eon-dice-roller.js"],
+  "styles": ["css/eon-dice-roller.css"],
+  "languages": [],
+  "url": "",
+  "manifest": "",
+  "download": ""
+}

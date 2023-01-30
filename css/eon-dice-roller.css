@@ -1,0 +1,162 @@
+.dice-tray {
+  -webkit-box-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+}
+
+.dice-tray > * {
+  margin: 2px;
+}
+
+.dice-tray .dice-tray__stacked {
+  height: 34px;
+  margin-right: 2px;
+}
+
+.dice-tray .flexrow {
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.dice-tray button {
+  background: transparent;
+  border: 1px solid #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  -webkit-box-shadow: 0 0 6px inset #8d9ea7;
+  box-shadow: 0 0 6px inset #8d9ea7;
+  -webkit-transition: all ease-in-out 0.25s;
+  -o-transition: all ease-in-out 0.25s;
+  transition: all ease-in-out 0.25s;
+  position: relative;
+}
+
+.dice-tray button:hover {
+  color: #ff6400;
+  border-color: #ff6400;
+  -webkit-box-shadow: 0 0 6px inset #ff6400;
+  box-shadow: 0 0 6px inset #ff6400;
+}
+
+.dice-tray button:hover svg * {
+  fill: #ff6400;
+}
+
+.dice-tray__ob.active {
+  background: #ff6400;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+.dice-tray__ob.active:hover {
+  background: #000;
+  -webkit-box-shadow: none;
+  border: 1px solid #000;
+  box-shadow: none;
+  color: #ff6400;
+}
+
+
+.dice-tray button.dice-tray__roll:hover {
+  background: #ff6400;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+.dice-tray button.dice-tray__math--sub:hover {
+  background: #ff6400;
+  -webkit-box-shadow: 0 0 6px inset #ff6400;
+  box-shadow: 0 0 6px inset #ff6400;
+  color: #fff;
+}
+
+.dice-tray button.dice-tray__math--add:hover {
+  background: #0a9843;
+  -webkit-box-shadow: 0 0 6px inset #0a9843;
+  box-shadow: 0 0 6px inset #0a9843;
+  border-color: #0a9843;
+  color: #fff;
+}
+
+.dice-tray button svg {
+  width: 100%;
+  height: auto;
+  -webkit-transition: all ease-in-out 0.25s;
+  -o-transition: all ease-in-out 0.25s;
+  transition: all ease-in-out 0.25s;
+}
+
+.dice-tray button svg * {
+  fill: #fff;
+}
+
+.dice-tray button .dice-tray__flag {
+  position: absolute;
+  bottom: calc(100% - 2px);
+  left: 0;
+  right: 0;
+  font-size: 14px;
+  height: 18px;
+  line-height: 1;
+  background-color: #ff6400;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 4px 4px 0 0;
+  max-height: 18px;
+  -webkit-transition: all ease-in-out 0.15s;
+  -o-transition: all ease-in-out 0.15s;
+  transition: all ease-in-out 0.15s;
+}
+
+.dice-tray button .dice-tray__flag:hover, .dice-tray button .dice-tray__flag:focus {
+  background-color: #ff6400;
+  color: #fff;
+}
+
+.dice-tray button .dice-tray__flag.hide {
+  max-height: 0;
+}
+
+.dice-tray input[type="text"] {
+  display: block;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  background-color: rgba(250, 250, 250, 0.15);
+  border: 1px solid #000;
+  -webkit-box-shadow: 0 0 6px inset #fff;
+  box-shadow: 0 0 6px inset #fff;
+}
+
+.dice-tray input[type="text"]:hover, .dice-tray input[type="text"]:focus {
+  border: 1px solid #ff6400;
+  -webkit-box-shadow: 0 0 6px inset #ff6400;
+  box-shadow: 0 0 6px inset #ff6400;
+}

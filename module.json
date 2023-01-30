@@ -1,7 +1,7 @@
 {
   "id": "eon-dice-roller",
-  "title": "Eon",
-  "description": "",
+  "title": "Eon tärningshjälp",
+  "description": "Modul till Eon IV för att underlätta att använda Foundry VTT tillsammans med rollspelet Eon.",
   "version": "1.0.0",
   "authors": [
     {
@@ -18,7 +18,7 @@
   "scripts": ["scripts/eon-dice-roller.js"],
   "styles": ["css/eon-dice-roller.css"],
   "languages": [],
-  "url": "",
-  "manifest": "",
+  "url": "https://github.com/JohanFalt/Foundry_EonDiceRoller",
+  "manifest": "https://raw.githubusercontent.com/JohanFalt/Foundry_EonDiceRoller/main/module.json",
   "download": ""
 }

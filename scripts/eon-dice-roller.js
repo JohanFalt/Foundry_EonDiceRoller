@@ -99,15 +99,17 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
       $chat_form.after($content);
       $content.find('.dice-tray__button').on('click', event => {
         event.preventDefault();
-        let $self = $(event.currentTarget);
         let dataset = event.currentTarget.dataset;
-        diceType = dataset.formula;
 
+        if (diceType != dataset.formula) {
+          numberDices = 0;
+        }
+
+        diceType = dataset.formula;
         _dtUpdateChatDice(dataset, 'add', html);
       });
       $content.find('.dice-tray__button').on('contextmenu', event => {
         event.preventDefault();
-        let $self = $(event.currentTarget);
         let dataset = event.currentTarget.dataset;
 
         if (numberDices == 0) {
@@ -122,26 +124,37 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
       
       $content.find('.dice-tray__math').on('click', event => {
         event.preventDefault();
-        let $self = $(event.currentTarget);
+        
         let dataset = event.currentTarget.dataset;
         let mod_val = $('input[name="dice.tray.modifier"]').val();
 
         mod_val = Number(mod_val);
         mod_val = Number.isNaN(mod_val) ? 0 : mod_val;
 
-        switch (dataset.formula) {
+        switch (dataset.type) {
           case '+1':
             mod_val = mod_val + 1;
+            if (mod_val == 4) {
+              mod_val = 0;
+              dataset.formula = diceType;
+              _dtUpdateChatDice(dataset, 'add', html);
+            }
             break;
 
           case '-1':
+            if (numberDices == 0) return;
             mod_val = mod_val - 1;
+            if (mod_val == -2) {
+              mod_val = 2;
+              dataset.formula = diceType;
+              _dtUpdateChatDice(dataset, 'sub', html);
+            }
+            break;
 
           default:
             break;
         }
         $('input[name="dice.tray.modifier"]').val(mod_val);
-        _dtApplyModifier(html);
       });
 
       formula_applier.apply_layout(html);
@@ -149,15 +162,27 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
   });
 });
 
-function _dtUpdateChatDice(dataset, direction, html) {
+function _dtUpdateChatDice(dataset, direction, html) {  
   if (direction == 'add') {
     numberDices++;
+    if (diceType == "") {
+      diceType = "d6";
+      dataset.formula = diceType;
+    }
   }
   if (direction == 'sub') {
     if (numberDices > 0) {
       numberDices--;
     }    
   }
+
+  const allDices = _objLoadGenericDice();
+
+  Object.keys(allDices).forEach(key => {
+    const dice = html.find(`.dice-tray__flag--${key}`);
+    dice.text('');
+    dice.addClass('hide');
+  });
 
   // Add a flag indicator on the dice.
   let $flag_button = html.find(`.dice-tray__flag--${dataset.formula}`);
@@ -179,40 +204,6 @@ function _dtUpdateChatDice(dataset, direction, html) {
     $flag_button.text('');
     $flag_button.addClass('hide');
   }
-  
-  _dtApplyModifier(html);
-}
-
-function _dtApplyModifier(html) {
-  $mod_input = html.find('.dice-tray__input');
-  mod_val = Number($mod_input.val());
-  let mod_string = '';
-  if ($mod_input.length > 0 && !Number.isNaN(mod_val)) {
-    if (mod_val > 0) {
-      mod_string = `+${mod_val}`;
-    }
-    else if (mod_val < 0) {
-      mod_string = `${mod_val}`;
-    }
-  }
-
-  // Existing modifier.
-  if (mod_string.length > 0 || mod_string === '') {
-    let $chat = html.find('#chat-form textarea');
-    let chat_val = String($chat.val());
-
-    let match_string = new RegExp('(\\+|\\-)([0-9]+)$');
-    if (chat_val.match(match_string)) {
-      chat_val = chat_val.replace(match_string, mod_string);
-      $chat.val(chat_val);
-    }
-    else if (chat_val !== '') {
-      chat_val = chat_val + mod_string;
-      $chat.val(chat_val);
-    }
-  }
-
-  return mod_string;
 }
 
 //----------------------------------
@@ -223,13 +214,28 @@ function _dtApplyModifier(html) {
 function _dtApplyGenericLayout(html) {  
   html.find('.dice-tray__roll').on('click', event => {
     event.preventDefault();
-    rollDice(numberDices, diceType, obRoll);
+    $mod_input = html.find('.dice-tray__input');
+    const bonus = Number($mod_input.val());
+    rollDice(numberDices, bonus, diceType, obRoll);
     // Trigger the event.
     html.find('.dice-tray__input').val(0);
     html.find('.dice-tray__flag').text('');
     html.find('.dice-tray__flag').addClass('hide');    
     numberDices = 0;
     diceType = "";
+  });
+
+  html.find('.dice-tray__ob').on('click', event => {
+    event.preventDefault();
+    // Trigger the event.
+    if (obRoll) {
+      html.find('.dice-tray__ob').removeClass('active');
+    }
+    else {
+      html.find('.dice-tray__ob').addClass('active');
+    }      
+    
+    obRoll = !obRoll; 
   });
 }
 
@@ -244,7 +250,15 @@ function _dtLoadGenericDice() {
   ];
 }
 
-function rollDice(number, type, obRoll) {
+function _objLoadGenericDice() {
+  return {
+      d6: 'd6',
+      d10: 'd10',
+      d100: 'd100'
+    };
+}
+
+function rollDice(number, bonus, type, obRoll) {
 	let canRoll = number > 0;
   let result = 0;
   let diceResult = [];
@@ -281,11 +295,22 @@ function rollDice(number, type, obRoll) {
 			  label += `${dice} `;
       }
 		});
+
+    result += parseInt(bonus);
 	}
+
+  let text = `<p>Slår ${number}${type}</p><p>${label}</p><p>Totalt: ${result}</p>`;
+
+  if (bonus > 0) {
+    text = `<p>Slår ${number}${type}+${bonus}</p><p>${label}</p><p>Totalt: ${result}</p>`;
+  }
+  else if (bonus < 0) {
+    text = `<p>Slår ${number}${type}-${bonus}</p><p>${label}</p><p>Totalt: ${result}</p>`;
+  }
 
 	roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-		content: `<p>Slår ${number}${type}</p><p>${label}</p><p>Totalt: ${result}</p>`
+		content: text
 	});
 
 	return canRoll;

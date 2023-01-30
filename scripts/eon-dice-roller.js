@@ -181,7 +181,7 @@ function _dtUpdateChatDice(dataset, direction, html) {
   Object.keys(allDices).forEach(key => {
     const dice = html.find(`.dice-tray__flag--${key}`);
     dice.text('');
-    dice.addClass('hide');
+    dice.addClass('hide'); 
   });
 
   // Add a flag indicator on the dice.

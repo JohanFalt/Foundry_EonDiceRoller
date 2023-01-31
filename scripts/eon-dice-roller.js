@@ -68,7 +68,7 @@ Hooks.once('init', async function() {
   const system_behavior_mapper = {
     generic: {
       apply_layout: function(html) {_dtApplyGenericLayout(html)},
-      load_dice: function() {return _dtLoadGenericDice()}
+      load_dice: function() {return [_objLoadGenericDice()]}
     }
   };
 
@@ -267,8 +267,11 @@ function rollDice(number, bonus, type, obRoll) {
   let numDices = number;
   let rolledDices = 0;
 
+  const allRolls = [];
+
   while (numDices > rolledDices) {
     roll = new Roll("1" + type);
+    allRolls.push(roll);
 	  roll.evaluate({async:true});	
     
     roll.terms[0].results.forEach((dice) => {
@@ -308,10 +311,13 @@ function rollDice(number, bonus, type, obRoll) {
     text = `<p>Slår ${number}${type}-${bonus}</p><p>${label}</p><p>Totalt: ${result}</p>`;
   }
 
-	roll.toMessage({
-    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-		content: text
-	});
+  let chatOpt = {
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    rolls: allRolls,
+    rollMode: game.settings.get('core', 'rollMode'),
+    content: text
+  };
+  ChatMessage.create(chatOpt);
 
-	return canRoll;
+  return canRoll;
 }

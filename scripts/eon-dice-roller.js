@@ -97,7 +97,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
     if (c.length > 0) {
       let $content = $(c);
       $chat_form.after($content);
-      $content.find('.dice-tray__button').on('click', event => {
+      $content.find('.eon-roller__button').on('click', event => {
         event.preventDefault();
         let dataset = event.currentTarget.dataset;
 
@@ -108,7 +108,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
         diceType = dataset.formula;
         _dtUpdateChatDice(dataset, 'add', html);
       });
-      $content.find('.dice-tray__button').on('contextmenu', event => {
+      $content.find('.eon-roller__button').on('contextmenu', event => {
         event.preventDefault();
         let dataset = event.currentTarget.dataset;
 
@@ -122,7 +122,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
         _dtUpdateChatDice(dataset, 'sub', html);
       });
       
-      $content.find('.dice-tray__math').on('click', event => {
+      $content.find('.eon-roller__math').on('click', event => {
         event.preventDefault();
         
         let dataset = event.currentTarget.dataset;
@@ -179,13 +179,13 @@ function _dtUpdateChatDice(dataset, direction, html) {
   const allDices = _objLoadGenericDice();
 
   Object.keys(allDices).forEach(key => {
-    const dice = html.find(`.dice-tray__flag--${key}`);
+    const dice = html.find(`.eon-roller__flag--${key}`);
     dice.text('');
     dice.addClass('hide'); 
   });
 
   // Add a flag indicator on the dice.
-  let $flag_button = html.find(`.dice-tray__flag--${dataset.formula}`);
+  let $flag_button = html.find(`.eon-roller__flag--${dataset.formula}`);
 
   if (numberDices == '') {
     numberDices = direction == 'add' ? 1 : 0;
@@ -212,27 +212,27 @@ function _dtUpdateChatDice(dataset, direction, html) {
 
 // LAYOUT BY SYSTEM
 function _dtApplyGenericLayout(html) {  
-  html.find('.dice-tray__roll').on('click', event => {
+  html.find('.eon-roller__roll').on('click', event => {
     event.preventDefault();
-    $mod_input = html.find('.dice-tray__input');
+    $mod_input = html.find('.eon-roller__input');
     const bonus = Number($mod_input.val());
     rollDice(numberDices, bonus, diceType, obRoll);
     // Trigger the event.
-    html.find('.dice-tray__input').val(0);
-    html.find('.dice-tray__flag').text('');
-    html.find('.dice-tray__flag').addClass('hide');    
+    html.find('.eon-roller__input').val(0);
+    html.find('.eon-roller__flag').text('');
+    html.find('.eon-roller__flag').addClass('hide');    
     numberDices = 0;
     diceType = "";
   });
 
-  html.find('.dice-tray__ob').on('click', event => {
+  html.find('.eon-roller__ob').on('click', event => {
     event.preventDefault();
     // Trigger the event.
     if (obRoll) {
-      html.find('.dice-tray__ob').removeClass('active');
+      html.find('.eon-roller__ob').removeClass('active');
     }
     else {
-      html.find('.dice-tray__ob').addClass('active');
+      html.find('.eon-roller__ob').addClass('active');
     }      
     
     obRoll = !obRoll; 
@@ -291,24 +291,57 @@ function rollDice(number, bonus, type, obRoll) {
 
 	if (canRoll) {
 		diceResult.forEach((dice) => {
-      if ((type == "d6") && (dice == 6) && (obRoll)) {
-        label += `<b>${dice}</b> `;
-      }
+      if (type == "d6") {
+        diceicon = "";
+
+        switch (dice) {
+          case 1:
+            diceicon = `<i class="fa-solid fa-dice-one tray-dice"></i>`;
+            break;
+          case 2:
+            diceicon = `<i class="fa-solid fa-dice-two tray-dice"></i>`;
+            break;
+          case 3:
+            diceicon = `<i class="fa-solid fa-dice-three tray-dice"></i>`;
+            break;
+          case 4:
+            diceicon = `<i class="fa-solid fa-dice-four tray-dice"></i>`;
+            break;
+          case 5:
+            diceicon = `<i class="fa-solid fa-dice-five tray-dice"></i>`;
+            break;
+          case 6:
+            if (obRoll) {
+              diceicon = `<i class="fa-solid fa-dice-six tray-dice tray-dice-max"></i>`;
+            }
+            else {
+              diceicon = `<i class="fa-solid fa-dice-six tray-dice"></i>`;
+            }
+            
+            break;
+        }
+      } 
       else {
-			  label += `${dice} `;
-      }
+        diceicon = `<span class="tray-dice-text">${dice}</span>`;
+      }       
+
+      label += `<div class="tray-dice-area">${diceicon}</div>`;
 		});
 
     result += parseInt(bonus);
 	}
 
-  let text = `<p>Slår ${number}${type}</p><p>${label}</p><p>Totalt: ${result}</p>`;
+  let text = `<div class="tray-roll-area"><h2>Slår ${number}${type}</h2></div><div class="tray-dice-row">${label}</div>`;
 
   if (bonus > 0) {
-    text = `<p>Slår ${number}${type}+${bonus}</p><p>${label}</p><p>Totalt: ${result}</p>`;
+    text = `<div class="tray-roll-area"><h2>Slår ${number}${type}+${bonus}</h2></div><div class="tray-dice-row">${label}</div>`;
   }
   else if (bonus < 0) {
-    text = `<p>Slår ${number}${type}-${bonus}</p><p>${label}</p><p>Totalt: ${result}</p>`;
+    text = `<div class="tray-roll-area"><h2>Slår ${number}${type}-${bonus}</h2></div><div class="tray-dice-row">${label}</div>`;
+  }
+
+  if (numDices > 1) {
+    text += `<div class="tray-result-area">Totalt: ${result}</div>`;
   }
 
   let chatOpt = {

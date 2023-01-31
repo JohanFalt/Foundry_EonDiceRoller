@@ -1,24 +1,26 @@
-.dice-tray {
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+.eon-roller {
   -webkit-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
 }
 
-.dice-tray > * {
+.eon-roller > * {
   margin: 2px;
 }
 
-.dice-tray .dice-tray__stacked {
+.eon-roller .eon-roller__stacked {
   height: 34px;
   margin-right: 2px;
 }
 
-.dice-tray .flexrow {
+.eon-roller .flexrow {
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
 
-.dice-tray button {
+.eon-roller button {
   background: transparent;
   border: 1px solid #000;
   display: -webkit-box;
@@ -45,25 +47,25 @@
   position: relative;
 }
 
-.dice-tray button:hover {
+.eon-roller button:hover {
   color: #ff6400;
   border-color: #ff6400;
   -webkit-box-shadow: 0 0 6px inset #ff6400;
   box-shadow: 0 0 6px inset #ff6400;
 }
 
-.dice-tray button:hover svg * {
+.eon-roller button:hover svg * {
   fill: #ff6400;
 }
 
-.dice-tray__ob.active {
+.eon-roller__ob.active {
   background: #ff6400;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
 }
 
-.dice-tray__ob.active:hover {
+.eon-roller__ob.active:hover {
   background: #000;
   -webkit-box-shadow: none;
   border: 1px solid #000;
@@ -72,21 +74,21 @@
 }
 
 
-.dice-tray button.dice-tray__roll:hover {
+.eon-roller button.eon-roller__roll:hover {
   background: #ff6400;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
 }
 
-.dice-tray button.dice-tray__math--sub:hover {
+.eon-roller button.eon-roller__math--sub:hover {
   background: #ff6400;
   -webkit-box-shadow: 0 0 6px inset #ff6400;
   box-shadow: 0 0 6px inset #ff6400;
   color: #fff;
 }
 
-.dice-tray button.dice-tray__math--add:hover {
+.eon-roller button.eon-roller__math--add:hover {
   background: #0a9843;
   -webkit-box-shadow: 0 0 6px inset #0a9843;
   box-shadow: 0 0 6px inset #0a9843;
@@ -94,7 +96,7 @@
   color: #fff;
 }
 
-.dice-tray button svg {
+.eon-roller button svg {
   width: 100%;
   height: auto;
   -webkit-transition: all ease-in-out 0.25s;
@@ -102,11 +104,11 @@
   transition: all ease-in-out 0.25s;
 }
 
-.dice-tray button svg * {
+.eon-roller button svg * {
   fill: #fff;
 }
 
-.dice-tray button .dice-tray__flag {
+.eon-roller button .eon-roller__flag {
   position: absolute;
   bottom: calc(100% - 2px);
   left: 0;
@@ -132,16 +134,16 @@
   transition: all ease-in-out 0.15s;
 }
 
-.dice-tray button .dice-tray__flag:hover, .dice-tray button .dice-tray__flag:focus {
+.eon-roller button .eon-roller__flag:hover, .eon-roller button .eon-roller__flag:focus {
   background-color: #ff6400;
   color: #fff;
 }
 
-.dice-tray button .dice-tray__flag.hide {
+.eon-roller button .eon-roller__flag.hide {
   max-height: 0;
 }
 
-.dice-tray input[type="text"] {
+.eon-roller input[type="text"] {
   display: block;
   color: #fff;
   font-weight: bold;
@@ -155,8 +157,44 @@
   box-shadow: 0 0 6px inset #fff;
 }
 
-.dice-tray input[type="text"]:hover, .dice-tray input[type="text"]:focus {
+.eon-roller input[type="text"]:hover, .eon-roller input[type="text"]:focus {
   border: 1px solid #ff6400;
   -webkit-box-shadow: 0 0 6px inset #ff6400;
   box-shadow: 0 0 6px inset #ff6400;
+}
+
+.tray-dice-row {
+  clear: both; 
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.tray-dice-area {
+  height: 30px;
+  flex: 0 1 calc(20%);
+}
+
+.tray-dice {
+  scale:2;
+  margin-left: 8px;
+  margin-top: 8px;
+}
+
+.tray-dice-text {
+  font-size: xx-large;
+}
+
+.tray-dice-max {
+  color: red;
+  opacity: 0.25;
+}
+
+.tray-roll-area {
+
+}
+
+.tray-result-area {
+  margin-top: 10px;
+  font-size: large;
 }

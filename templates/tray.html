@@ -1,18 +1,18 @@
-<section class="dice-tray">
+<section class="eon-roller">
   {{#each dicerows as |dice|}}
-    <div class="dice-tray__buttons flexrow">
+    <div class="eon-roller__buttons flexrow">
       {{#each dice as |label key|}}
-        <button class="dice-tray__button" data-formula="{{key}}" title="{{key}}"><span class="dice-tray__flag dice-tray__flag--{{key}} hide"></span>{{> (dtSvgDie key) }}</button>
+        <button class="eon-roller__button" data-formula="{{key}}" title="{{key}}"><span class="eon-roller__flag eon-roller__flag--{{key}} hide"></span>{{> (dtSvgDie key) }}</button>
       {{/each}}
     </div>
   {{/each}}
 
-  <div class="dice-tray__math flexrow">
-    <button class="dice-tray__ob active">Ob</button>
-    <button class="dice-tray__math dice-tray__math--sub" data-type="-1">-</button>
-    <input class="dice-tray__input" name="dice.tray.modifier" type="text" value="0" readonly />
-    <button class="dice-tray__math dice-tray__math--add" data-type="+1">+</button>
-    <div id="dice-tray-math" hidden></div>
-    <button class="dice-tray__roll">Rulla</button>
+  <div class="eon-roller__math flexrow">
+    <button class="eon-roller__ob active">Ob</button>
+    <button class="eon-roller__math eon-roller__math--sub" data-type="-1">-</button>
+    <input class="eon-roller__input" name="dice.tray.modifier" type="text" value="0" readonly />
+    <button class="eon-roller__math eon-roller__math--add" data-type="+1">+</button>
+    <div id="eon-roller-math" hidden></div>
+    <button class="eon-roller__roll">Rulla</button>
   </div>
 </section>

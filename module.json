@@ -2,7 +2,7 @@
   "id": "eon-dice-roller",
   "title": "Eon dice helper",
   "description": "Modul to roll the dices for the Swedish role playing game Eon IV to make it easier to use Foundry VTT.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "authors": [
     {
       "name": "Johan Fält",
@@ -12,13 +12,13 @@
   ],
   "compatibility": {
     "minimum": "10",
-    "verified": "10",
-    "maximum": "10"
+    "verified": "11",
+    "maximum": "11"
   },
   "scripts": ["scripts/eon-dice-roller.js"],
   "styles": ["css/eon-dice-roller.css"],
   "languages": [],
   "url": "https://github.com/JohanFalt/Foundry_EonDiceRoller",
   "manifest": "https://raw.githubusercontent.com/JohanFalt/Foundry_EonDiceRoller/main/module.json",
-  "download": "https://github.com/JohanFalt/Foundry_EonDiceRoller/archive/refs/tags/v1.0.zip"
+  "download": "https://github.com/JohanFalt/Foundry_EonDiceRoller/archive/refs/tags/v1.1.zip"
 }

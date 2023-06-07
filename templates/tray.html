@@ -1,4 +1,11 @@
 <section class="eon-roller">
+  <div class="eon-roller__math flexrow">
+    {{#numFromLoop 1 10}}
+      <button class="eon-roller__num" data-value="{{this}}">{{this}}</button>
+    {{/numFromLoop}}
+    <button class="eon-roller__num" data-value="-1">...</button>
+  </div>
+
   {{#each dicerows as |dice|}}
     <div class="eon-roller__buttons flexrow">
       {{#each dice as |label key|}}
@@ -15,4 +22,8 @@
     <div id="eon-roller-math" hidden></div>
     <button class="eon-roller__roll">Rulla</button>
   </div>
+
+  
+    
+    </div>
 </section>

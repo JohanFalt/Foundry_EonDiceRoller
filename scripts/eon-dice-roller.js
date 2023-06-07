@@ -157,9 +157,28 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
         $('input[name="dice.tray.modifier"]').val(mod_val);
       });
 
+      $content.find('.eon-roller__num').on('click', event => {
+        event.preventDefault();
+        let dataset = event.currentTarget.dataset;
+        dataset.formula = diceType;
+
+        dataset.value = parseInt(dataset.value);
+        _dtUpdateChatDice(dataset, 'calc', html);
+      });
+
       formula_applier.apply_layout(html);
     }
   });
+});
+
+Handlebars.registerHelper("numFromLoop", function (from, num, options) {
+  let ret = "";
+
+  for (let i = from; i <= num; i++) {
+    ret = ret + options.fn(i);
+  }
+
+  return ret;
 });
 
 function _dtUpdateChatDice(dataset, direction, html) {  
@@ -174,6 +193,17 @@ function _dtUpdateChatDice(dataset, direction, html) {
     if (numberDices > 0) {
       numberDices--;
     }    
+  }
+  if (direction == 'calc') {
+    numberDices = dataset.value;
+
+    if (diceType == "") {
+      diceType = "d6";
+      dataset.formula = diceType;      
+    }    
+    if (numberDices == -1) {
+      numberDices = 0;
+    }
   }
 
   const allDices = _objLoadGenericDice();

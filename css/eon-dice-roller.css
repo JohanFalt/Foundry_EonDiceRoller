@@ -1,5 +1,35 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
+@font-face {
+  font-family: "rubrik";
+  src: url('../assets/fonts/vinque rg.otf') format("opentype");
+}
+
+@font-face {
+  font-family: "eon-font";
+  src: url('../assets/fonts/OFLGoudyStMTT.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "eon-font-siffror";
+  src: url('../assets/fonts/Sukhumala Regular.otf') format("opentype");
+}
+
+:root {
+  --main-rubrik: "rubrik", Arial, Helvetica, sans-serif;
+  --main-font: "eon-font", Arial, Helvetica, sans-serif;
+  --main-font-siffror: "eon-font-siffror", Arial, Helvetica, sans-serif;
+
+  --font-large: 16px;
+  --font-x-large: 24px;
+
+  --chat-background-color: url('../assets/img/graphics/chat-background.jpg');
+  --chat-text-color: black;
+  --chat-border-message: 3px ridge black;
+  --chat-header-text-color: black;
+  --chat-header-background-color: url('../assets/img/graphics/stone.jpg');
+}
+
 .eon-roller {
   -webkit-box-flex: 0;
   -ms-flex: 0;
@@ -163,38 +193,87 @@
   box-shadow: 0 0 6px inset #ff6400;
 }
 
-.tray-dice-row {
-  clear: both; 
-  overflow: hidden;
-  display: flex;
-  flex-flow: row wrap;
+/* chat */
+#chat-log {    
+  font-family: var(--main-font-siffror);
+  background: var(--chat-background-color);  
 }
 
-.tray-dice-area {
-  height: 30px;
-  flex: 0 1 calc(20%);
+#chat-log .chat-message {
+  padding: 0;      
 }
 
-.tray-dice {
+#chat-log .message {
+  border: var(--chat-border-message);
+  color: var(--chat-text-color);
+}
+
+#chat-log .message .message-header {
+  font-family: var(--main-rubrik);
+  font-size: var(--font-large); 
+  padding: 5px;
+  margin-bottom: 5px;
+  color: var(--chat-header-text-color);
+  border-bottom: 3px ridge #6c4737;    
+  background: var(--chat-header-background-color);
+}
+
+#chat-log .tray-title-area {
+  font-family: var(--main-rubrik);
+  font-size: var(--font-x-large);    
+  margin-bottom: 5px;    
+  border-bottom: 1px solid black;
+  padding: 5px;
+}
+
+#chat-log .tray-action-area {
+  padding: 5px;    
+}
+
+#chat-log .tray-roll-area {
+  padding: 5px;  
+  color: black;  
+}
+
+#chat-log .tray-roll-area .black-dice {
+  color: black;
+}
+
+#chat-log .tray-roll-area .red-dice {
+  color: red;
+}
+
+#chat-log .tray-roll-area .green-dice {
+  color: green;
+}
+
+#chat-log .tray-roll-area .blue-dice {
+  color: blue;
+}
+
+#chat-log .tray-roll-area .tray-dice {
+  margin: 5px;
   scale:2;
   margin-left: 8px;
-  margin-top: 8px;
+  margin-top: 8px;  
+  opacity: 0.8;
 }
 
-.tray-dice-text {
-  font-size: xx-large;
+#chat-log .tray-roll-area .tray-dice-max.ob-roll {
+  opacity: 0.4;
 }
 
-.tray-dice-max {
-  color: red;
-  opacity: 0.25;
+#chat-log .tray-roll-area .tray-dice-max {
+  opacity: 0.8;
 }
 
-.tray-roll-area {
-
-}
-
-.tray-result-area {
-  margin-top: 10px;
-  font-size: large;
+#chat-log .tray-result-area {
+  font-family: var(--main-rubrik);
+  background: var(--chat-header-background-color);    
+  color: var(--chat-header-text-color);
+  border-top: 3px ridge #6c4737;    
+  padding: 5px;
+  margin-top: 5px;
+  clear: both;
+  overflow: hidden;
 }

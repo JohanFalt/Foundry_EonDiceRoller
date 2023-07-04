@@ -2,7 +2,186 @@ let numberDices = 0;
 let diceType = "";
 let obRoll = true;
 
+function register$e(namespace) {
+  
+}
+
+const systemSettings = function() {
+  game.settings.register("eon-dice-roller", "moduleVersion", {
+		name: "Version",
+		hint: "Modulens version",
+		scope: "world",
+		config: true,
+		default: "1",
+		type: String,
+	});
+
+  game.settings.register("eon-dice-roller", "diceColor", {
+    name: "Färg",
+    hint: "Vilken färg skall tärningarna ha?",
+    scope: "world",
+    config: false,
+    default: "black-dice",
+    type: String,
+    choices: {
+      "black-dice": "Svarta",
+      "red-dice": "Röda",
+      "green-dice": "Gröna",
+      "blue-dice": "Blåa"
+    }
+  });
+
+  /* Groups of settings */
+  game.settings.registerMenu("eon-dice-roller", "graphicSettings", {
+      name: "Grafik",
+      hint: "De olika grafiska inställningarna som finns tillgängliga",
+      label: "Grafiska inställningar",
+      icon: "icon fa-solid fa-gear",
+      type: Graphics,
+      restricted: true,
+  });
+}
+
+class Graphics extends FormApplication {
+  /** @override */
+  static get defaultOptions() {
+      return mergeObject(super.defaultOptions, {
+          id: "graphics",
+          classes: ["setting-dialog"],
+          title: "Grafikinställningar",
+          template: "modules/eon-dice-roller/templates/dialog-settings.html",
+      });
+  }
+
+  getData(options) {
+    const hasPermission = game.user.can("SETTINGS_MODIFY");  
+    const data = {
+        system: { 
+            title: game.system.title, 
+            menus: [], 
+            settings: [] 
+        }
+    };
+
+    // Classify all settings
+    if (hasPermission) {
+        for (let s of game.settings.settings.values()) {
+            // // Exclude settings the user cannot change
+            if (s.key == "diceColor") {
+                // Update setting data
+                const setting = duplicate(s);
+
+                setting.value = game.settings.get("eon-dice-roller", setting.key);
+                setting.type = s.type instanceof Function ? s.type.name : "String";
+                setting.scope = "eon-dice-roller";
+                setting.isBoolean = s.type === Boolean;
+                setting.isSelect = s.choices !== undefined;
+                data.system.settings.push(setting);
+            } 
+        }
+    }
+
+    // Return data
+    return {
+        user: game.user,
+        canConfigure: hasPermission,
+        systemTitle: game.system.title,
+        data: data
+    };
+}
+
+  activateListeners(html) {
+      super.activateListeners(html);
+      html.find(".submenu button").click(this._onClickSubmenu.bind(this));
+      html.find('button[name="reset"]').click(this._onResetDefaults.bind(this));
+  }
+
+  /**
+   * Handle activating the button to configure User Role permissions
+   * @param event {Event} The initial button click event
+   * @private
+   */
+  _onClickSubmenu(event) {
+      event.preventDefault();
+      const menu = game.settings.menus.get(event.currentTarget.dataset.key);
+      if (!menu) return ui.notifications.error("No submenu found for the provided key");
+      const app = new menu.type();
+      return app.render(true);
+  }
+
+  /**
+   * Handle button click to reset default settings
+   * @param event {Event} The initial button click event
+   * @private
+   */
+  _onResetDefaults(event) {
+      event.preventDefault();
+      const button = event.currentTarget;
+      const form = button.form;
+
+      for (let [k, v] of game.settings.settings.entries()) {
+          if (v.config) {
+              let input = form[k];
+              if (input.type === "checkbox") input.checked = v.default;
+              else if (input) input.value = v.default;
+          }
+      }
+  }
+
+  /** @override */
+  async _updateObject(_, formData) {
+    for (let [k, v] of Object.entries(flattenObject(formData))) {
+      let s = game.settings.settings.get(k);
+      let current = game.settings.get("eon-dice-roller", s.key);
+
+      if (v !== current) {
+          await game.settings.set("eon-dice-roller", s.key, v);
+      }
+  }
+  }
+}
+
+async function doNotice(systemVersion) {
+  if (!game.user.isGM) {
+    return;
+  }
+  
+  const enrichedMessage = await TextEditor.enrichHTML(
+    /*html*/
+    `
+	<div class="tray-title-area">Eon dice helper ${systemVersion}</div>
+	<div class="tray-action-area">
+		Hej! Detta är en hjälpmodul till det Svenska rollspelet Eon. Den är tänkt som ett sätt att slå de tärningar som rollspelet behöver samt ge möjligheten att kunna göra detta på ett enkelt och överskådligt sätt.
+	<div>
+	<div class="tray-title-area">Nya saker</div>
+  <div class="tray-action-area">
+	  <ul style="margin-top: 0">
+		  <li>[<a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues/2">#2</a>]: Ställa in tärningsfärger.
+	  </ul>
+  </div>
+	<div class="tray-title-area">Länkar</div>
+    <div class="tray-action-area">
+    <ul style="margin-top: 0">
+      <li><a href="https://github.com/JohanFalt/Foundry_EonDiceRoller">Projektets källkod</a></li>
+      <li><a href="https://github.com/JohanFalt/Foundry_EON-RPG/discussions/landing">Diskussion</a></li>
+      <li><a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues">Rapportera önskemål eller fel</a></li>
+      <li><a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/blob/main/LICENSE">Licensierad under MIT Licensen</a></li>
+    </ul>
+  </div>
+	`,
+    { async: true }
+  );
+  await ChatMessage.create({
+    user: game.user.id,
+    content: enrichedMessage,
+    type: CONST.CHAT_MESSAGE_TYPES.OTHER
+  });
+}
+
 Hooks.once('init', async function() {
+  // Register System Settings
+	systemSettings();
+
   const dice = {
     'd6': `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -76,7 +255,21 @@ Hooks.once('init', async function() {
   CONFIG.DICETRAY.SYSTEM_MAP = system_behavior_mapper;
 });
 
-Hooks.once('ready', function() { });
+Hooks.once("ready", async () => {
+  // Do anything once the system is ready
+	const installedVersion = game.settings.get("eon-dice-roller", "moduleVersion");
+  const module = game.data.modules.filter(modul => modul.id == "eon-dice-roller");	
+  const systemVersion = module[0].version;
+
+  if (game.user.isGM) {
+    if ((installedVersion !== systemVersion || installedVersion === null)) {
+      if (_compareVersion(installedVersion, systemVersion)) {        
+        await doNotice(systemVersion);
+        game.settings.set("eon-dice-roller", "moduleVersion", systemVersion);
+      }
+    }
+  }  
+});
 
 Hooks.on('renderSidebarTab', (app, html, data) => {
   // Exit early if necessary;
@@ -180,6 +373,44 @@ Handlebars.registerHelper("numFromLoop", function (from, num, options) {
 
   return ret;
 });
+
+  /**
+ * Compares two version numbers to see if the new one is newer than the old one
+ * @param oldVersion   The existing version no: e.g. 1.5.9
+ * @param newVersion   The new version no: e.g. 1.5.10
+ */
+  function _compareVersion(oldVersion, newVersion) {
+    if (newVersion == "") {
+        return false;
+    }
+
+    if (newVersion == undefined) {
+        return false;
+    }
+
+    if ((oldVersion == "") || (oldVersion == "1")) {
+        return true;
+    }
+
+    if (oldVersion == newVersion) {
+        return false;
+    }
+
+    try {
+        const newfields = newVersion.split(".");
+        const oldfields = oldVersion.split(".");
+
+        for (let i = 0; i <= 2; i++) {
+            if (parseInt(newfields[i]) > parseInt(oldfields[i])) {
+                return true;
+            }
+        }
+    }
+    catch {
+    }
+
+    return false
+}
 
 function _dtUpdateChatDice(dataset, direction, html) {  
   if (direction == 'add') {
@@ -288,11 +519,13 @@ function _objLoadGenericDice() {
     };
 }
 
-function rollDice(number, bonus, type, obRoll) {
+async function rollDice(number, bonus, type, obRoll) {
 	let canRoll = number > 0;
+
   let result = 0;
   let diceResult = [];
   let label = "";
+  const color = game.settings.get("eon-dice-roller", "diceColor");
 
   let numDices = number;
   let rolledDices = 0;
@@ -319,7 +552,7 @@ function rollDice(number, bonus, type, obRoll) {
     });
   }
 
-	if (canRoll) {
+	/* if (canRoll) {
 		diceResult.forEach((dice) => {
       if (type == "d6") {
         diceicon = "";
@@ -359,9 +592,9 @@ function rollDice(number, bonus, type, obRoll) {
 		});
 
     result += parseInt(bonus);
-	}
+	} */
 
-  let text = `<div class="tray-roll-area"><h2>Slår ${number}${type}</h2></div><div class="tray-dice-row">${label}</div>`;
+  /* let text = `<div class="tray-roll-area"><h2>Slår ${number}${type}</h2></div><div class="tray-dice-row">${label}</div>`;
 
   if (bonus > 0) {
     text = `<div class="tray-roll-area"><h2>Slår ${number}${type}+${bonus}</h2></div><div class="tray-dice-row">${label}</div>`;
@@ -372,15 +605,60 @@ function rollDice(number, bonus, type, obRoll) {
 
   if (numDices > 1) {
     text += `<div class="tray-result-area">Totalt: ${result}</div>`;
+  } */
+
+  const diceList = [];
+
+    if (canRoll) {
+      diceResult.forEach((dice) => {
+        diceList.push(dice);
+      });
+
+      result += parseInt(bonus);
+    }
+
+  let dicetype = type.replace("d", "T");
+  let text = `Slår ${number}${dicetype}`;
+
+  if (bonus > 0) {
+    text = `Slår ${number}${dicetype}+${bonus}`;
+  }
+  else if (bonus < 0) {
+    text = `Slår ${number}${dicetype}-${bonus}`;
   }
 
-  let chatOpt = {
+  const templateData = {
+      data: {
+          config: undefined,
+          dicecolor: color,
+          isrollable: canRoll,
+          type: "general",
+          action: "Slår generella tärningar",
+          title: text,
+          diceresult: diceList,
+          result: result,
+          obroll: obRoll
+      }
+  };
+
+  const template = `modules/eon-dice-roller/templates/roll-template.html`;
+  const html = await renderTemplate(template, templateData);
+
+  /* let chatOpt = {
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rolls: allRolls,
     rollMode: game.settings.get('core', 'rollMode'),
     content: text
   };
-  ChatMessage.create(chatOpt);
+  ChatMessage.create(chatOpt); */
+
+  const chatData = {
+    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    content: html,
+    speaker: ChatMessage.getSpeaker(),
+    rollMode: game.settings.get("core", "rollMode")        
+  };
+  ChatMessage.create(chatData);
 
   return canRoll;
 }

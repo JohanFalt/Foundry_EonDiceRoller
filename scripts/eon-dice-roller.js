@@ -156,7 +156,7 @@ async function doNotice(systemVersion) {
 	<div class="tray-title-area">Nya saker</div>
   <div class="tray-action-area">
 	  <ul style="margin-top: 0">
-		  <li>[<a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues/2">#2</a>]: Ställa in tärningsfärger.
+      <li>[<a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues/3">#3</a>]: Stöd för Dice So Nice.</li>
 	  </ul>
   </div>
 	<div class="tray-title-area">Länkar</div>
@@ -552,61 +552,6 @@ async function rollDice(number, bonus, type, obRoll) {
     });
   }
 
-	/* if (canRoll) {
-		diceResult.forEach((dice) => {
-      if (type == "d6") {
-        diceicon = "";
-
-        switch (dice) {
-          case 1:
-            diceicon = `<i class="fa-solid fa-dice-one tray-dice"></i>`;
-            break;
-          case 2:
-            diceicon = `<i class="fa-solid fa-dice-two tray-dice"></i>`;
-            break;
-          case 3:
-            diceicon = `<i class="fa-solid fa-dice-three tray-dice"></i>`;
-            break;
-          case 4:
-            diceicon = `<i class="fa-solid fa-dice-four tray-dice"></i>`;
-            break;
-          case 5:
-            diceicon = `<i class="fa-solid fa-dice-five tray-dice"></i>`;
-            break;
-          case 6:
-            if (obRoll) {
-              diceicon = `<i class="fa-solid fa-dice-six tray-dice tray-dice-max"></i>`;
-            }
-            else {
-              diceicon = `<i class="fa-solid fa-dice-six tray-dice"></i>`;
-            }
-            
-            break;
-        }
-      } 
-      else {
-        diceicon = `<span class="tray-dice-text">${dice}</span>`;
-      }       
-
-      label += `<div class="tray-dice-area">${diceicon}</div>`;
-		});
-
-    result += parseInt(bonus);
-	} */
-
-  /* let text = `<div class="tray-roll-area"><h2>Slår ${number}${type}</h2></div><div class="tray-dice-row">${label}</div>`;
-
-  if (bonus > 0) {
-    text = `<div class="tray-roll-area"><h2>Slår ${number}${type}+${bonus}</h2></div><div class="tray-dice-row">${label}</div>`;
-  }
-  else if (bonus < 0) {
-    text = `<div class="tray-roll-area"><h2>Slår ${number}${type}-${bonus}</h2></div><div class="tray-dice-row">${label}</div>`;
-  }
-
-  if (numDices > 1) {
-    text += `<div class="tray-result-area">Totalt: ${result}</div>`;
-  } */
-
   const diceList = [];
 
     if (canRoll) {
@@ -644,16 +589,9 @@ async function rollDice(number, bonus, type, obRoll) {
   const template = `modules/eon-dice-roller/templates/roll-template.html`;
   const html = await renderTemplate(template, templateData);
 
-  /* let chatOpt = {
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-    rolls: allRolls,
-    rollMode: game.settings.get('core', 'rollMode'),
-    content: text
-  };
-  ChatMessage.create(chatOpt); */
-
   const chatData = {
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    rolls: allRolls,
     content: html,
     speaker: ChatMessage.getSpeaker(),
     rollMode: game.settings.get("core", "rollMode")        

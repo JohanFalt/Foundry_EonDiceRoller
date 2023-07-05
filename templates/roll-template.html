@@ -34,7 +34,10 @@
 
 {{#if (eq data.type data.config.slag.vapen)}}
     <div class="tray-title-area">{{data.action}}</div>
-    <div class="tray-action-area">{{data.title}}</div>
+    <div class="tray-action-area">
+        {{data.info}}
+    </div>
+    <div class="tray-action-area">{{data.title}}</div>    
     <div class="tray-roll-area">
         {{#each data.diceresult as |dice key|}}
             {{#if (eq dice 1)}}<i class="fa-solid fa-dice-one tray-dice {{../data.dicecolor}}"></i>{{/if}}

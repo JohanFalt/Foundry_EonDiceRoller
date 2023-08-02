@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: "eon-font";
-  src: url('../assets/fonts/OFLGoudyStMTT.ttf') format("truetype");
+  src: url('../assets/fonts/OFLGoudyStMTT.ttf') format("opentype");
 }
 
 @font-face {
@@ -16,12 +16,12 @@
 }
 
 :root {
-  --main-rubrik: "rubrik", Arial, Helvetica, sans-serif;
-  --main-font: "eon-font", Arial, Helvetica, sans-serif;
-  --main-font-siffror: "eon-font-siffror", Arial, Helvetica, sans-serif;
+  --main-chat-font: "eon-font", Arial, Helvetica, sans-serif;
+  --main-chat-font-siffror: "eon-font-siffror", Arial, Helvetica, sans-serif; 
+  --main-chat-rubrik: "rubrik", Arial, Helvetica, sans-serif;  
 
-  --font-large: 16px;
-  --font-x-large: 24px;
+  --chat-font-large: 16px;
+  --chat-font-x-large: 24px;
 
   --chat-background-color: url('../assets/img/graphics/chat-background.jpg');
   --chat-text-color: black;
@@ -195,7 +195,7 @@
 
 /* chat */
 #chat-log {    
-  font-family: var(--main-font-siffror);
+  font-family: var(--main-chat-font-siffror);
   background: var(--chat-background-color);  
 }
 
@@ -209,8 +209,8 @@
 }
 
 #chat-log .message .message-header {
-  font-family: var(--main-rubrik);
-  font-size: var(--font-large); 
+  font-family: var(--main-chat-rubrik);
+  font-size: var(--chat-font-large); 
   padding: 5px;
   margin-bottom: 5px;
   color: var(--chat-header-text-color);
@@ -219,8 +219,8 @@
 }
 
 #chat-log .tray-title-area {
-  font-family: var(--main-rubrik);
-  font-size: var(--font-x-large);    
+  font-family: var(--main-chat-rubrik);
+  font-size: var(--chat-font-x-large);    
   margin-bottom: 5px;    
   border-bottom: 1px solid black;
   padding: 5px;
@@ -268,7 +268,7 @@
 }
 
 #chat-log .tray-result-area {
-  font-family: var(--main-rubrik);
+  font-family: var(--main-chat-rubrik);
   background: var(--chat-header-background-color);    
   color: var(--chat-header-text-color);
   border-top: 3px ridge #6c4737;    

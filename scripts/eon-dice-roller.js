@@ -153,7 +153,13 @@ async function doNotice(systemVersion) {
 	<div class="tray-action-area">
 		Hej! Detta är en hjälpmodul till det Svenska rollspelet Eon. Den är tänkt som ett sätt att slå de tärningar som rollspelet behöver samt ge möjligheten att kunna göra detta på ett enkelt och överskådligt sätt.
 	<div>
-	<div class="tray-title-area">Nya saker</div>
+  <div class="tray-title-area">Fixar i v1.4.1</div>
+  <div class="tray-action-area">
+	  <ul style="margin-top: 0">
+      <li>[<a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues/4">#4</a>]: Slagen fungerade inte utanför Eon-systemet.</li>
+	  </ul>
+  </div>
+	<div class="tray-title-area">Nya saker v1.4</div>
   <div class="tray-action-area">
 	  <ul style="margin-top: 0">
       <li>[<a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues/3">#3</a>]: Stöd för Dice So Nice.</li>
@@ -372,6 +378,15 @@ Handlebars.registerHelper("numFromLoop", function (from, num, options) {
   }
 
   return ret;
+});
+
+Handlebars.registerHelper('eqAny', function () {
+  for(let i = 1; i < arguments.length; i++) {
+      if(arguments[0] === arguments[i]) {
+      return true;
+      }
+  }
+  return false;
 });
 
   /**

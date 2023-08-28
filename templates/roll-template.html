@@ -17,6 +17,11 @@
 
 {{#if (eqAny data.type data.config.slag.grundegenskap data.config.slag.fardighet)}}
     <div class="tray-title-area">{{data.action}}</div>
+    {{#if (ne data.into "")}}
+        <div class="tray-action-area">
+            {{data.info}}
+        </div>
+    {{/if}}
     <div class="tray-action-area">{{data.title}}</div>
     <div class="tray-roll-area">
         {{#each data.diceresult as |dice key|}}
@@ -34,9 +39,11 @@
 
 {{#if (eq data.type data.config.slag.vapen)}}
     <div class="tray-title-area">{{data.action}}</div>
-    <div class="tray-action-area">
-        {{data.info}}
-    </div>
+    {{#if (ne data.into "")}}
+        <div class="tray-action-area">
+            {{data.info}}
+        </div>
+    {{/if}}    
     <div class="tray-action-area">{{data.title}}</div>    
     <div class="tray-roll-area">
         {{#each data.diceresult as |dice key|}}

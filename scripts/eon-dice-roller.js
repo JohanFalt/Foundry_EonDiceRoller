@@ -153,6 +153,12 @@ async function doNotice(systemVersion) {
 	<div class="tray-action-area">
 		Hej! Detta är en hjälpmodul till det Svenska rollspelet Eon. Den är tänkt som ett sätt att slå de tärningar som rollspelet behöver samt ge möjligheten att kunna göra detta på ett enkelt och överskådligt sätt.
 	<div>
+  <div class="tray-title-area">Fixar i v1.5.0</div>
+  <div class="tray-action-area">
+	  <ul style="margin-top: 0">
+      <li>Anpassningar för nya alfa-versionen av Eon-systemet.</li>
+	  </ul>
+  </div>
   <div class="tray-title-area">Fixar i v1.4.1</div>
   <div class="tray-action-area">
 	  <ul style="margin-top: 0">

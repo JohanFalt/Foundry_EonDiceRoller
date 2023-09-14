@@ -1,6 +1,19 @@
 {{#if (eq data.type "general")}}
     <div class="tray-title-area">{{data.action}}</div>
-    <div class="tray-action-area">{{data.title}}</div>
+    <div class="tray-action-area">
+        {{data.title}}
+    </div>
+    {{#if (ne data.info "")}}
+        <div class="tray-action-area">
+            {{data.info}}
+        </div>
+    {{/if}}
+    {{#if (gt data.difficulty 0)}}
+        <div class="tray-action-area">
+            Svårighet: {{data.difficulty}}<br />  
+            {{data.resulttext}}            
+        </div>
+    {{/if}}
     <div class="tray-roll-area">
         {{#each data.diceresult as |dice key|}}
             {{#if (eq dice 1)}}<i class="fa-solid fa-dice-one tray-dice {{../data.dicecolor}}"></i>{{/if}}
@@ -12,17 +25,25 @@
             {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
         {{/each}}
     </div>
-    <div class="tray-result-area">Totalt: {{data.result}}</div>
+    <div class="tray-result-area">
+        Totalt: {{data.result}}
+    </div>
 {{/if}}
 
 {{#if (eqAny data.type data.config.slag.grundegenskap data.config.slag.fardighet)}}
     <div class="tray-title-area">{{data.action}}</div>
-    {{#if (ne data.into "")}}
+    {{#if (ne data.info "")}}
         <div class="tray-action-area">
             {{data.info}}
         </div>
     {{/if}}
     <div class="tray-action-area">{{data.title}}</div>
+    {{#if (gt data.difficulty 0)}}
+        <div class="tray-action-area">
+            Svårighet: {{data.difficulty}}<br />  
+            {{data.resulttext}}            
+        </div>
+    {{/if}}
     <div class="tray-roll-area">
         {{#each data.diceresult as |dice key|}}
             {{#if (eq dice 1)}}<i class="fa-solid fa-dice-one tray-dice {{../data.dicecolor}}"></i>{{/if}}
@@ -34,17 +55,25 @@
             {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
         {{/each}}
     </div>
-    <div class="tray-result-area">Totalt: {{data.result}}</div>
+    <div class="tray-result-area">
+        Totalt: {{data.result}}
+    </div>
 {{/if}}
 
 {{#if (eq data.type data.config.slag.vapen)}}
     <div class="tray-title-area">{{data.action}}</div>
-    {{#if (ne data.into "")}}
+    {{#if (ne data.info "")}}
         <div class="tray-action-area">
             {{data.info}}
         </div>
     {{/if}}    
     <div class="tray-action-area">{{data.title}}</div>    
+    {{#if (gt data.difficulty 0)}}
+        <div class="tray-action-area">
+            Svårighet: {{data.difficulty}}<br />  
+            {{data.resulttext}}            
+        </div>
+    {{/if}}
     <div class="tray-roll-area">
         {{#each data.diceresult as |dice key|}}
             {{#if (eq dice 1)}}<i class="fa-solid fa-dice-one tray-dice {{../data.dicecolor}}"></i>{{/if}}
@@ -56,5 +85,7 @@
             {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
         {{/each}}
     </div>
-    <div class="tray-result-area">Totalt: {{data.result}}</div>
+    <div class="tray-result-area">
+        Totalt: {{data.result}}
+    </div>
 {{/if}}

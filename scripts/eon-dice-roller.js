@@ -141,8 +141,12 @@ class Graphics extends FormApplication {
   }
 }
 
-async function doNotice(systemVersion) {
+async function doNotice(installedVersion, systemVersion) {
   if (!game.user.isGM) {
+    return;
+  }
+
+  if (!_compareVersion(installedVersion, systemVersion, 2)) {
     return;
   }
   
@@ -156,7 +160,7 @@ async function doNotice(systemVersion) {
   <div class="tray-title-area">Fixar i v1.6.0</div>
   <div class="tray-action-area">
 	  <ul style="margin-top: 0">
-      <li>Anpassningar för den nya alfa-versionen av Eon-systemet.</li>
+      <li>Slutliga anpassningar för Eon-systemet.</li>
 	  </ul>
   </div>
   <div class="tray-title-area">Länkar</div>
@@ -263,8 +267,8 @@ Hooks.once("ready", async () => {
 
   if (game.user.isGM) {
     if ((installedVersion !== systemVersion || installedVersion === null)) {
-      if (_compareVersion(installedVersion, systemVersion)) {        
-        await doNotice(systemVersion);
+      if (_compareVersion(installedVersion, systemVersion, 3)) {        
+        await doNotice(installedVersion, systemVersion);
         game.settings.set("eon-dice-roller", "moduleVersion", systemVersion);
       }
     }
@@ -387,8 +391,9 @@ Handlebars.registerHelper('eqAny', function () {
  * Compares two version numbers to see if the new one is newer than the old one
  * @param oldVersion   The existing version no: e.g. 1.5.9
  * @param newVersion   The new version no: e.g. 1.5.10
+ * @param depth        How many version no are to check, normal is 3
  */
-  function _compareVersion(oldVersion, newVersion) {
+  function _compareVersion(oldVersion, newVersion, depth) {
     if (newVersion == "") {
         return false;
     }
@@ -409,7 +414,7 @@ Handlebars.registerHelper('eqAny', function () {
         const newfields = newVersion.split(".");
         const oldfields = oldVersion.split(".");
 
-        for (let i = 0; i <= 2; i++) {
+        for (let i = 0; i <= depth; i++) {
             if (parseInt(newfields[i]) > parseInt(oldfields[i])) {
                 return true;
             }

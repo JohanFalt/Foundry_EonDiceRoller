@@ -157,19 +157,17 @@ async function doNotice(installedVersion, systemVersion) {
 	<div class="tray-action-area">
 		Hej! Detta är en hjälpmodul till det Svenska rollspelet Eon. Den är tänkt som ett sätt att slå de tärningar som rollspelet behöver samt ge möjligheten att kunna göra detta på ett enkelt och överskådligt sätt.
 	<div>
-  <div class="tray-title-area">Fixar i v1.6.0</div>
+  <div class="tray-title-area">Fixar i v1.6.2</div>
   <div class="tray-action-area">
 	  <ul style="margin-top: 0">
-      <li>Slutliga anpassningar för Eon-systemet.</li>
+      <li>Fixat mindre visuella fel.</li>
+      <li>Lagt till så Eon systemet kan skicka en beskrivningstext</li>
 	  </ul>
   </div>
   <div class="tray-title-area">Länkar</div>
     <div class="tray-action-area">
     <ul style="margin-top: 0">
-      <li><a href="https://github.com/JohanFalt/Foundry_EonDiceRoller">Projektets källkod</a></li>
-      <li><a href="https://github.com/JohanFalt/Foundry_EON-RPG/discussions/landing">Diskussion</a></li>
       <li><a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/issues">Rapportera önskemål eller fel</a></li>
-      <li><a href="https://github.com/JohanFalt/Foundry_EonDiceRoller/blob/main/LICENSE">Licensierad under MIT Licensen</a></li>
     </ul>
   </div>
 	`,
@@ -583,7 +581,8 @@ async function rollDice(number, bonus, type, obRoll) {
     text = `Slår ${number}${dicetype}+${bonus}`;
   }
   else if (bonus < 0) {
-    text = `Slår ${number}${dicetype}-${bonus}`;
+    //text = `Slår ${number}${dicetype}-${bonus}`;
+    text = `Slår ${number}${dicetype}${bonus}`;
   }
 
   const templateData = {

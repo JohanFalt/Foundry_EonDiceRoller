@@ -120,3 +120,15 @@
         Totalt: {{data.result}}
     </div>
 {{/if}}
+
+{{#if (eq data.type "message")}}
+    <div class="tray-title-area">Beskrivning</div>
+
+    <div class="tray-action-area">{{data.title}}</div>
+
+    {{#if (ne data.description "")}}
+        <div class="tray-action-area">
+            {{{data.description}}}
+        </div>
+    {{/if}} 
+{{/if}}

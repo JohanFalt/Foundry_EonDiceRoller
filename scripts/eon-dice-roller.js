@@ -45,7 +45,7 @@ const systemSettings = function() {
 class Graphics extends FormApplication {
   /** @override */
   static get defaultOptions() {
-      return mergeObject(super.defaultOptions, {
+      return foundry.utils.mergeObject(super.defaultOptions, {
           id: "graphics",
           classes: ["setting-dialog"],
           title: "Grafikinställningar",
@@ -69,7 +69,7 @@ class Graphics extends FormApplication {
             // // Exclude settings the user cannot change
             if (s.key == "diceColor") {
                 // Update setting data
-                const setting = duplicate(s);
+                const setting = foundry.utils.duplicate(s);
 
                 setting.value = game.settings.get("eon-dice-roller", setting.key);
                 setting.type = s.type instanceof Function ? s.type.name : "String";
@@ -547,7 +547,7 @@ async function rollDice(number, bonus, type, obRoll) {
   while (numDices > rolledDices) {
     roll = new Roll("1" + type);
     allRolls.push(roll);
-	  roll.evaluate({async:true});	
+	  await roll.evaluate();
     
     roll.terms[0].results.forEach((dice) => {
       rolledDices += 1;
@@ -603,7 +603,6 @@ async function rollDice(number, bonus, type, obRoll) {
   const html = await renderTemplate(template, templateData);
 
   const chatData = {
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rolls: allRolls,
     content: html,
     speaker: ChatMessage.getSpeaker(),

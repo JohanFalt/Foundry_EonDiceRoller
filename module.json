@@ -22,6 +22,6 @@
     "css/eon-dice-roller.css"
   ],
   "url": "https://github.com/JohanFalt/Foundry_EonDiceRoller",
-  "manifest": "https://raw.githubusercontent.com/JohanFalt/Foundry_EonDiceRoller/main/module.json",
-  "download": "https://github.com/JohanFalt/Foundry_EonDiceRoller/archive/refs/tags/v1.6.2.zip"
+  "manifest": "https://raw.githubusercontent.com/JohanFalt/Foundry_EonDiceRoller/Foundry-11/module.json",
+  "download": "https://github.com/JohanFalt/Foundry_EonDiceRoller/archive/refs/tags/Final-v1.6.zip"
 }

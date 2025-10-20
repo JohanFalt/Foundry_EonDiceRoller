@@ -23,17 +23,23 @@
         </div>
     {{/if}}
 
-    <div class="tray-roll-area">
-        {{#each data.diceresult as |dice key|}}
-            {{#if (eq dice 1)}}<i class="fa-solid fa-dice-one tray-dice {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (eq dice 2)}}<i class="fa-solid fa-dice-two tray-dice {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (eq dice 3)}}<i class="fa-solid fa-dice-three tray-dice {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (eq dice 4)}}<i class="fa-solid fa-dice-four tray-dice {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (eq dice 5)}}<i class="fa-solid fa-dice-five tray-dice {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (and (eq ../data.obroll false) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
-        {{/each}}
-    </div>
+    {{log data}}
+
+    {{#if (eq data.dicetype "d6")}}
+
+        <div class="tray-roll-area">
+            {{#each data.diceresult as |dice key|}}
+                {{#if (eq dice 1)}}<i class="fa-solid fa-dice-one tray-dice {{../data.dicecolor}}"></i>{{/if}}
+                {{#if (eq dice 2)}}<i class="fa-solid fa-dice-two tray-dice {{../data.dicecolor}}"></i>{{/if}}
+                {{#if (eq dice 3)}}<i class="fa-solid fa-dice-three tray-dice {{../data.dicecolor}}"></i>{{/if}}
+                {{#if (eq dice 4)}}<i class="fa-solid fa-dice-four tray-dice {{../data.dicecolor}}"></i>{{/if}}
+                {{#if (eq dice 5)}}<i class="fa-solid fa-dice-five tray-dice {{../data.dicecolor}}"></i>{{/if}}
+                {{#if (and (eq ../data.obroll false) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max {{../data.dicecolor}}"></i>{{/if}}
+                {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
+            {{/each}}
+        </div>
+
+    {{/if}}
 
     <div class="tray-result-area">
         Totalt: {{data.result}}
@@ -72,7 +78,7 @@
             {{#if (eq dice 4)}}<i class="fa-solid fa-dice-four tray-dice {{../data.dicecolor}}"></i>{{/if}}
             {{#if (eq dice 5)}}<i class="fa-solid fa-dice-five tray-dice {{../data.dicecolor}}"></i>{{/if}}
             {{#if (and (eq ../data.obroll false) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max {{../data.dicecolor}}"></i>{{/if}}
-            {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
+            {{#if (and (eq ../data.obroll true) (eq dice 6))}}<i class="exploding fa-solid fa-dice-six tray-dice tray-dice-max ob-roll {{../data.dicecolor}}"></i>{{/if}}
         {{/each}}
     </div>
 

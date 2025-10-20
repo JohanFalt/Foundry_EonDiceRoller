@@ -40,6 +40,11 @@ section.eon-roller {
   -webkit-box-flex: 0;
   -ms-flex: 0;
   flex: 0;
+  background: var(--background-color, var(--color-cool-5));
+}
+
+.eon-roller .exploding {
+
 }
 
 .eon-roller > * {
@@ -231,21 +236,25 @@ section.eon-roller {
 }
 
 /* chat */
-#chat-log {    
+#chat-log,
+#chat {    
   font-family: var(--main-chat-font-siffror);
   background: var(--chat-background-color);  
 }
 
-#chat-log .chat-message {
+#chat-log .chat-message,
+#chat .chat-message {
   padding: 0;      
 }
 
-#chat-log .message {
+#chat-log .message,
+#chat .message {
   border: var(--chat-border-message);
   color: var(--chat-text-color);
 }
 
-#chat-log .message .message-header {
+#chat-log .message .message-header,
+#chat .message .message-header {
   font-family: var(--main-chat-rubrik);
   font-size: var(--chat-font-large); 
   padding: 5px;
@@ -255,7 +264,8 @@ section.eon-roller {
   background: var(--chat-header-background-color);
 }
 
-#chat-log .tray-title-area {
+#chat-log .tray-title-area,
+#chat .tray-title-area {
   font-family: var(--main-chat-rubrik);
   font-size: var(--chat-font-x-large);    
   margin-bottom: 5px;    
@@ -263,32 +273,39 @@ section.eon-roller {
   padding: 5px;
 }
 
-#chat-log .tray-action-area {
+#chat-log .tray-action-area,
+#chat .tray-action-area {
   padding: 5px;    
 }
 
-#chat-log .tray-roll-area {
+#chat-log .tray-roll-area,
+#chat .tray-roll-area {
   padding: 5px;  
   color: black;  
 }
 
-#chat-log .tray-roll-area .black-dice {
+#chat-log .tray-roll-area .black-dice,
+#chat .tray-roll-area .black-dice {
   color: black;
 }
 
-#chat-log .tray-roll-area .red-dice {
+#chat-log .tray-roll-area .red-dice,
+#chat .tray-roll-area .red-dice {
   color: red;
 }
 
-#chat-log .tray-roll-area .green-dice {
+#chat-log .tray-roll-area .green-dice,
+#chat .tray-roll-area .green-dice {
   color: green;
 }
 
-#chat-log .tray-roll-area .blue-dice {
+#chat-log .tray-roll-area .blue-dice,
+#chat .tray-roll-area .blue-dice {
   color: blue;
 }
 
-#chat-log .tray-roll-area .tray-dice {
+#chat-log .tray-roll-area .tray-dice,
+#chat .tray-roll-area .tray-dice {
   margin: 5px;
   scale:2;
   margin-left: 8px;
@@ -296,15 +313,18 @@ section.eon-roller {
   opacity: 0.8;
 }
 
-#chat-log .tray-roll-area .tray-dice-max.ob-roll {
+#chat-log .tray-roll-area .tray-dice-max.ob-roll,
+#chat .tray-roll-area .tray-dice-max.ob-roll {
   opacity: 0.4;
 }
 
-#chat-log .tray-roll-area .tray-dice-max {
+#chat-log .tray-roll-area .tray-dice-max,
+#chat .tray-roll-area .tray-dice-max {
   opacity: 0.8;
 }
 
-#chat-log .tray-result-area {
+#chat-log .tray-result-area,
+#chat .tray-result-area {
   font-family: var(--main-chat-rubrik);
   background: var(--chat-header-background-color);    
   color: var(--chat-header-text-color);

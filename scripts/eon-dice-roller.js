@@ -149,13 +149,13 @@ Hooks.once('init', async function() {
 
     const dice = {
         'd6': `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+                <svg version="1.1" id="eon_dice_d6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
                     <g>
                         <path d="M 11.5 9 C 10.149212 8.9609669 8.960847 10.149856 9 11.5 L 9 51.195312 C 8.7783001 52.934174 9.4649439 55.027114 11.5 55.199219 L 51.195312 55.199219 C 52.934562 55.433915 55.164599 54.729057 55.099609 52.599609 L 55.099609 12.90625 C 55.334305 11.167 54.629448 8.935012 52.5 9 L 11.5 9 z M 22.671875 13.931641 A 4.3972788 4.3972788 0 0 1 22.705078 13.931641 A 4.3972788 4.3972788 0 0 1 27.101562 18.330078 A 4.3972788 4.3972788 0 0 1 22.705078 22.726562 A 4.3972788 4.3972788 0 0 1 18.306641 18.330078 A 4.3972788 4.3972788 0 0 1 22.671875 13.931641 z M 41.367188 13.931641 A 4.3972788 4.3972788 0 0 1 41.398438 13.931641 A 4.3972788 4.3972788 0 0 1 45.796875 18.330078 A 4.3972788 4.3972788 0 0 1 41.398438 22.726562 A 4.3972788 4.3972788 0 0 1 37.001953 18.330078 A 4.3972788 4.3972788 0 0 1 41.367188 13.931641 z M 22.671875 27.732422 A 4.3972788 4.3972788 0 0 1 22.705078 27.732422 A 4.3972788 4.3972788 0 0 1 27.101562 32.130859 A 4.3972788 4.3972788 0 0 1 22.705078 36.527344 A 4.3972788 4.3972788 0 0 1 18.306641 32.130859 A 4.3972788 4.3972788 0 0 1 22.671875 27.732422 z M 41.367188 27.732422 A 4.3972788 4.3972788 0 0 1 41.398438 27.732422 A 4.3972788 4.3972788 0 0 1 45.796875 32.130859 A 4.3972788 4.3972788 0 0 1 41.398438 36.527344 A 4.3972788 4.3972788 0 0 1 37.001953 32.130859 A 4.3972788 4.3972788 0 0 1 41.367188 27.732422 z M 22.671875 41.751953 A 4.3972788 4.3972788 0 0 1 22.705078 41.751953 A 4.3972788 4.3972788 0 0 1 27.101562 46.150391 A 4.3972788 4.3972788 0 0 1 22.705078 50.546875 A 4.3972788 4.3972788 0 0 1 18.306641 46.150391 A 4.3972788 4.3972788 0 0 1 22.671875 41.751953 z M 41.398438 41.751953 A 4.3972788 -4.3972788 0 0 1 45.796875 46.150391 A 4.3972788 -4.3972788 0 0 1 41.398438 50.546875 A 4.3972788 -4.3972788 0 0 1 37.001953 46.150391 A 4.3972788 -4.3972788 0 0 1 41.398438 41.751953 z " />
                     </g>
                 </svg>`,
         'd10': `<?xml version="1.0" encoding="utf-8"?>
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+                <svg version="1.1" id="eon_dice_d10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
                 <g>
                     <g transform="matrix(1.1679092,0,0,1.1679092,-274.931,-137.53749)">
                         <path d="M263.4,124.6L249.9,153l12.5,8.1l13.5-8.2L263.4,124.6z"/>
@@ -167,7 +167,7 @@ Hooks.once('init', async function() {
                 </g>
                 </svg>`,
         'd100': `<?xml version="1.0" encoding="utf-8"?>
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+                <svg version="1.1" id="eon_dice_d100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
                 <g>
                     <g transform="matrix(1.1679092,0,0,1.1679092,-274.931,-137.53749)">
                         <polygon points="264.7,150.8 263.7,151.4 262.2,152.3 261.4,152.8 259.6,153.8 253.3,157.7 242.7,150.8 254.2,126.6 258.2,135.9
@@ -207,7 +207,7 @@ Hooks.once('init', async function() {
 
 Hooks.once("ready", async () => {
     // Do anything once the system is ready
-        const installedVersion = game.settings.get("eon-dice-roller", "moduleVersion");
+    const installedVersion = game.settings.get("eon-dice-roller", "moduleVersion");
     const module = game.data.modules.filter(modul => modul.id == "eon-dice-roller");	
     const systemVersion = module[0].version;
 
@@ -218,7 +218,7 @@ Hooks.once("ready", async () => {
                 game.settings.set("eon-dice-roller", "moduleVersion", systemVersion);
             }
         }
-    }  
+    } 
 });
 
 Hooks.on('renderSidebar', (app, html, data) => {
@@ -238,24 +238,33 @@ Hooks.on('renderSidebar', (app, html, data) => {
     };
 
     foundry.applications.handlebars.renderTemplate(template, options).then(renderedHtml => {
-        // Create a new div element to hold the rendered HTML
+    // Create a new section element for the rendered HTML
         const div = document.createElement('section');
         div.innerHTML = renderedHtml;
 
-        // Find the target container for appending
-        const $chat_form = html.querySelector('div.chat-controls');        
+        // Find the chat form
+        const chatForm = html.querySelector('form.chat-form');
 
-        if ($chat_form) {
-            // Append the rendered HTML after the chat form
-            $chat_form.after(div);
+        if (chatForm) {
+            // Find the textarea inside the form
+            const chatTextarea = chatForm.querySelector('#chat-message');
 
-            // Attach event listeners for button clicks and right-clicks
-            attachButtonEvents(div);  // This will handle the button clicks and right-clicks
-            formula_applier.apply_layout(html); // Apply any layout changes needed
+            if (chatTextarea) {
+                // Insert the div right after the textarea
+                chatTextarea.insertAdjacentElement('afterend', div);
+            } else {
+                //console.error('Textarea with id="chat-message" not found inside chat-form!');
+                chatForm.appendChild(div); // fallback: append to form end
+            }
+
+            // Attach events and apply layout
+            attachButtonEvents(div);
+            formula_applier.apply_layout(html);
         } else {
             console.error('Chat form not found!');
         }
     });
+
 });
 
 Handlebars.registerHelper("numFromLoop", function (from, num, options) {
@@ -292,6 +301,9 @@ function attachButtonEvents(div) {
         if (button) {
             handleButtonClick(event, button);  // Handle the button click logic
         }
+        else {
+            console.log("no button");
+        }
     });
 
     div.addEventListener('contextmenu', function(event) {
@@ -300,8 +312,12 @@ function attachButtonEvents(div) {
         if (button) {
             handleButtonRightClick(event, button);  // Handle the right-click logic
         }
+        else {
+            console.log("no button");
+        }
     });
 }
+
 
 
 
@@ -599,14 +615,13 @@ function _dtApplyGenericLayout(html) {
     html.querySelector('.eon-roller__roll')?.addEventListener('click', async event => {
         event.preventDefault();
 
-        //let modInput = html.querySelector('.eon-roller__input');
         let modInput = html.querySelector('input[name="dice.tray.modifier');
         
         const bonus = modInput.value;
 
         await rollDice(numberDices, Number(bonus), diceType, obRoll);
 
-        const flag = html.querySelector('.eon-roller__flag');
+        const flag = html.querySelector(`.eon-roller__flag--${diceType}`);
         flag.textContent = '';               // Replaces .text('')
         flag.classList.add('hide');         // Replaces .addClass('hide')
         numberDices = 0;
@@ -647,13 +662,17 @@ function _objLoadGenericDice() {
     };
 }
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function rollDice(number, bonus, type, obRoll) {
     let canRoll = number > 0;
     let result = 0;
     let diceResult = [];
     let numDices = number;
     let rolledDices = 0;
-    const allRolls = [];
+    const allRolls = [];    
 
     while (numDices > rolledDices) {
         roll = new Roll("1" + type);
@@ -697,6 +716,7 @@ async function rollDice(number, bonus, type, obRoll) {
 
     const templateData = {
         data: {
+            dicetype: type,
             config: undefined,
             dicecolor: game.settings.get("eon-dice-roller", "diceColor"),
             isrollable: canRoll,
